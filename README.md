@@ -2,7 +2,10 @@
 
 * 🌍 Opens the ChatGPT from any country, even from unsupported ones (e.g. Russia).
 * 👨🏻‍💻 Bypasses captcha.
-* 🔥 Bypasses «ChatGPT is at capacity right now»
+* 🔥 Bypasses «ChatGPT is at capacity right now».
+
+## How it works
+[![Video](https://img.youtube.com/vi/_jjEwdO-cMM/0.jpg)](https://www.youtube.com/watch?v=_jjEwdO-cMM)
 
 ## How to run
 
@@ -30,7 +33,7 @@ touch ~/Desktop/chatgpt.command
 
 with the following content
 ```sh
-#!/bin/zsh
+#!/bin/sh
 
 PROJECT_PATH="$HOME/chatgpt-runner"
 
