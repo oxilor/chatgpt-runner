@@ -2,10 +2,10 @@
 
 * 🌍 Opens the ChatGPT from any country, even from unsupported ones (e.g. Russia).
 * 👨🏻‍💻 Bypasses captcha.
-* 🔥 Bypasses «ChatGPT is at capacity right now».
+* 🔁 Tries again if ChatGPT is at capacity right now.
 
 ## How it works
-[![Video](https://img.youtube.com/vi/_jjEwdO-cMM/0.jpg)](https://www.youtube.com/watch?v=_jjEwdO-cMM)
+[![Video](https://img.youtube.com/vi/gFqiFfD8O8M/0.jpg)](https://www.youtube.com/watch?v=gFqiFfD8O8M)
 
 ## How to run
 
