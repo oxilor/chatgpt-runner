@@ -27,7 +27,7 @@ async function typeText(page: Page, text: string) {
 const CLOUDFLARE_SELECTOR = 'iframe[src^="https://challenges.cloudflare.com"]'
 
 async function solveCloudflareCaptcha(page: Page) {
-  const iframeElement = await page.waitForSelector(CLOUDFLARE_SELECTOR)
+  const iframeElement = await page.waitForSelector(CLOUDFLARE_SELECTOR, { timeout: 0 })
   const iframe = await iframeElement.contentFrame()
   await delay(3000)
   await iframe.waitForSelector('#verifying-text', { hidden: true })
@@ -39,21 +39,23 @@ async function solveCloudflareCaptcha(page: Page) {
 const VERIFY_BUTTON_SELECTOR = 'input[value="Verify you are human"]'
 
 async function solveVerifyButton(page: Page) {
+  await page.waitForSelector(VERIFY_BUTTON_SELECTOR, { timeout: 0 })
   await clickToElement(page, VERIFY_BUTTON_SELECTOR)
   await page.waitForSelector(VERIFY_BUTTON_SELECTOR, { hidden: true })
   await solveVerifyButton(page)
 }
 
 async function solveCapacity(page: Page) {
-  await page.waitForSelector('text/ChatGPT is at capacity right now')
+  await page.waitForSelector('text/ChatGPT is at capacity right now', { timeout: 0 })
   await delay(500)
-  throw new Error()
+  await page.reload()
+  await solveCapacity(page)
 }
 
 async function signIn(page: Page) {
-  await page.waitForSelector('text/Welcome to ChatGPT')
+  await page.waitForSelector('text/Welcome to ChatGPT', { timeout: 0 })
 
-  await page.waitForNavigation()
+  await delay(2000)
   await clickToElement(page, 'div[id="__next"] > div:nth-of-type(1) > div > div:last-of-type > button:first-of-type')
 
   await page.waitForNavigation()
@@ -85,10 +87,10 @@ const browser = await puppeteer.launch({
   ],
 })
 
-while(true) {
-  const [page] = await browser.pages()
-  await page.setDefaultTimeout(60000)
+const [page] = await browser.pages()
+page.setDefaultTimeout(60000)
 
+while(true) {
   try {
     await Promise.race([
       solveCloudflareCaptcha(page),
